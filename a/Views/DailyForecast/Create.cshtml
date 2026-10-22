@@ -1,0 +1,75 @@
+@model a.Models.DailyForecast
+
+@{
+    ViewData["Title"] = "Nhập thông tin thời tiết";
+}
+
+<div class="container mt-4" style="font-family: 'Times New Roman', Times, serif; max-width: 700px;">
+    <h3 class="font-weight-bold mb-4" style="font-weight: bold;">NHẬP THÔNG TIN DỰ BÁO THỜI TIẾT</h3>
+
+    @using (Html.BeginForm("Create", "DailyForecast", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="card p-4 shadow-sm">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger mb-3" })
+
+            <!-- Thành phố (DropDownList) -->
+            <div class="mb-3 row">
+                @Html.LabelFor(model => model.CityID, htmlAttributes: new { @class = "col-sm-4 col-form-label font-weight-bold" })
+                <div class="col-sm-8">
+                    @Html.DropDownListFor(model => model.CityID, (IEnumerable<SelectListItem>)ViewBag.Cities, "-- Chọn thành phố --", new { @class = "form-select" })
+                    @Html.ValidationMessageFor(model => model.CityID, "", new { @class = "text-danger small" })
+                </div>
+            </div>
+
+            <!-- Ngày dự báo -->
+            <div class="mb-3 row">
+                @Html.LabelFor(model => model.ForecastDate, htmlAttributes: new { @class = "col-sm-4 col-form-label font-weight-bold" })
+                <div class="col-sm-8">
+                    @Html.TextBoxFor(model => model.ForecastDate, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
+                    @Html.ValidationMessageFor(model => model.ForecastDate, "", new { @class = "text-danger small" })
+                </div>
+            </div>
+
+            <!-- Nhiệt độ thấp nhất -->
+            <div class="mb-3 row">
+                @Html.LabelFor(model => model.MinTemperature, htmlAttributes: new { @class = "col-sm-4 col-form-label font-weight-bold" })
+                <div class="col-sm-8">
+                    @Html.TextBoxFor(model => model.MinTemperature, new { @class = "form-control", type = "number", step = "any", placeholder = "Nhập nhiệt độ thấp nhất" })
+                    @Html.ValidationMessageFor(model => model.MinTemperature, "", new { @class = "text-danger small" })
+                </div>
+            </div>
+
+            <!-- Nhiệt độ cao nhất -->
+            <div class="mb-3 row">
+                @Html.LabelFor(model => model.MaxTemperature, htmlAttributes: new { @class = "col-sm-4 col-form-label font-weight-bold" })
+                <div class="col-sm-8">
+                    @Html.TextBoxFor(model => model.MaxTemperature, new { @class = "form-control", type = "number", step = "any", placeholder = "Nhập nhiệt độ cao nhất" })
+                    @Html.ValidationMessageFor(model => model.MaxTemperature, "", new { @class = "text-danger small" })
+                </div>
+            </div>
+
+            <!-- Độ ẩm -->
+            <div class="mb-3 row">
+                @Html.LabelFor(model => model.Humidity, htmlAttributes: new { @class = "col-sm-4 col-form-label font-weight-bold" })
+                <div class="col-sm-8">
+                    @Html.TextBoxFor(model => model.Humidity, new { @class = "form-control", type = "number", min = "0", max = "100", placeholder = "Nhập độ ẩm (%)" })
+                    @Html.ValidationMessageFor(model => model.Humidity, "", new { @class = "text-danger small" })
+                </div>
+            </div>
+
+            <!-- Nút gửi dữ liệu -->
+            <div class="row mt-3">
+                <div class="col-sm-8 offset-sm-4">
+                    <button type="submit" class="btn btn-primary px-4">Gửi dữ liệu</button>
+                    @Html.ActionLink("Quay lại danh sách", "Index", "DailyForecast", null, new { @class = "btn btn-outline-secondary ms-2" })
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

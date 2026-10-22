@@ -1,0 +1,62 @@
+@model a.Models.DailyForecast
+
+@{
+    ViewData["Title"] = "Thông tin chi tiết vừa nhập";
+}
+
+<div class="container mt-4" style="font-family: 'Times New Roman', Times, serif; max-width: 700px;">
+    <h3 class="font-weight-bold mb-4" style="font-weight: bold; text-transform: uppercase;">
+        THÔNG TIN ĐỐI TƯỢNG VỪA NHẬP
+    </h3>
+
+    <div class="card p-4 shadow-sm">
+        <dl class="row mb-0" style="font-size: 16px;">
+            <dt class="col-sm-5 text-muted">
+                @Html.DisplayNameFor(model => model.CityID)
+            </dt>
+            <dd class="col-sm-7 font-weight-bold">
+                @Html.DisplayFor(model => model.CityID)
+            </dd>
+
+            <dt class="col-sm-5 text-muted">
+                @Html.DisplayNameFor(model => model.ForecastDate)
+            </dt>
+            <dd class="col-sm-7">
+                @Model.ForecastDate.ToString("dd/MM/yyyy")
+            </dd>
+
+            <dt class="col-sm-5 text-muted">
+                @Html.DisplayNameFor(model => model.MinTemperature)
+            </dt>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.MinTemperature) °C
+            </dd>
+
+            <dt class="col-sm-5 text-muted">
+                @Html.DisplayNameFor(model => model.MaxTemperature)
+            </dt>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.MaxTemperature) °C
+            </dd>
+
+            <dt class="col-sm-5 text-muted">
+                @Html.DisplayNameFor(model => model.Humidity)
+            </dt>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.Humidity) %
+            </dd>
+
+            <dt class="col-sm-5 text-primary font-weight-bold" style="font-size: 18px;">
+                @Html.DisplayNameFor(model => model.AvgTemperature)
+            </dt>
+            <dd class="col-sm-7 text-primary font-weight-bold" style="font-size: 18px;">
+                @Html.DisplayFor(model => model.AvgTemperature) °C
+            </dd>
+        </dl>
+    </div>
+
+    <div class="mt-4">
+        @Html.ActionLink("Xem danh sách", "Index", "DailyForecast", null, new { @class = "btn btn-outline-primary" })
+        @Html.ActionLink("Tiếp tục nhập", "Create", "DailyForecast", null, new { @class = "btn btn-success ms-2" })
+    </div>
+</div>

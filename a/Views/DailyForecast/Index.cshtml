@@ -1,0 +1,71 @@
+@{
+    ViewData["Title"] = "Dự báo thời tiết";
+    var listByDate = ViewBag.ListByDate as List<a.Models.DailyForecast> ?? new List<a.Models.DailyForecast>();
+    var listHanoi = ViewBag.ListHanoi as List<a.Models.DailyForecast> ?? new List<a.Models.DailyForecast>();
+}
+
+<div class="container mt-4" style="font-family: 'Times New Roman', Times, serif;">
+    <!-- Bảng 1: Thông tin thời tiết ngày 20/10/2026 -->
+    <div class="mb-5">
+        <h4 class="text-center font-weight-bold mb-3" style="font-weight: bold; font-size: 18px; text-transform: uppercase;">
+            THÔNG TIN THỜI TIẾT NGÀY 20/10/2026
+        </h4>
+        <table class="table table-bordered table-striped text-center align-middle" style="max-width: 900px; margin: 0 auto;">
+            <thead class="table-light">
+                <tr style="font-weight: bold;">
+                    <th>Mã TP</th>
+                    <th>Ngày dự báo</th>
+                    <th>Nhiệt độ thấp nhất</th>
+                    <th>Nhiệt độ cao nhất</th>
+                    <th>Nhiệt độ trung bình</th>
+                    <th>Độ ẩm</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in listByDate)
+                {
+                    <tr>
+                        <td>@item.CityID</td>
+                        <td>@item.ForecastDate.ToString("dd/MM/yyyy")</td>
+                        <td>@item.MinTemperature</td>
+                        <td>@item.MaxTemperature</td>
+                        <td>@item.AvgTemperature</td>
+                        <td>@item.Humidity</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Bảng 2: Thông tin thời tiết của Hà Nội -->
+    <div class="mb-5">
+        <h4 class="text-center font-weight-bold mb-3" style="font-weight: bold; font-size: 18px; text-transform: uppercase;">
+            THÔNG TIN THỜI TIẾT CỦA HÀ NỘI
+        </h4>
+        <table class="table table-bordered table-striped text-center align-middle" style="max-width: 900px; margin: 0 auto;">
+            <thead class="table-light">
+                <tr style="font-weight: bold;">
+                    <th>Mã TP</th>
+                    <th>Ngày dự báo</th>
+                    <th>Nhiệt độ thấp nhất</th>
+                    <th>Nhiệt độ cao nhất</th>
+                    <th>Nhiệt độ trung bình</th>
+                    <th>Độ ẩm</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in listHanoi)
+                {
+                    <tr>
+                        <td>@item.CityID</td>
+                        <td>@item.ForecastDate.ToString("dd/MM/yyyy")</td>
+                        <td>@item.MinTemperature</td>
+                        <td>@item.MaxTemperature</td>
+                        <td>@item.AvgTemperature</td>
+                        <td>@item.Humidity</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
